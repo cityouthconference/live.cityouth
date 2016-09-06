@@ -1,0 +1,143 @@
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>CITYC16 Live!</title>
+
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<!-- Slick -->
+	<link href="css/slick.css" rel="stylesheet">
+	<link href="css/slick-theme.css" rel="stylesheet">
+	<!-- Custom -->
+	<link href="css/index.css" rel="stylesheet">
+</head>
+<body onresize="resize()">
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+					<i class="fa fa-bars"></i>
+				</button>
+				<p class="navbar-brand page-scroll">
+					CITYC16 <span class="myriad"> LIVE!</span>
+				</p>
+			</div>
+
+			<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+				<ul class="nav navbar-nav">
+					<li class="hidden">
+						<a href="#page-top"></a>
+					</li>
+					<li>
+						<a href=""><b>Home</b></a>
+						<!-- Schedule -->
+					</li>
+					<li>
+						<a href="schedule.pdf" target="_blank"><b>Schedule</b></a>
+						<!-- Tribes -->
+					</li>
+					<li>
+						<a href="#tribes"><b>Tribes</b></a>
+					</li>
+					<!-- Rest of tabs here -->
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<section id='main'>
+		<div class="carousel">
+			<div id='page1' class="page">
+				<div class="content-section text-center margin-auto">
+					<h1 id="time">00:00</h1>
+					<h3 id="date">January 1, 2016</h3>
+					<br>
+					<h2><span id="this-event" class="Myriad">0</span></h2>
+					<h3><span class='myriad'>Up Next</span>: <span id="next-event">0</span></h3>
+					<h4 id='next-start'></h4>
+				</div>
+				<div id="page1bg"></div>
+			</div>
+			<div id='page2' class="page">
+				<div class="content-section text-center margin-auto">
+					<h1>Tribe Points Live!</h1>
+					<p>Updated as of: <span id="points-update-time"></span></p>
+					<br>
+					<h2><span class='myriad'>Team Water</span>: <span id="points1">0</span> points</h2>
+					<h2><span class='myriad'>Team Steel</span>: <span id="points2">0</span> points</h2>
+					<h2><span class='myriad'>Team Fire</span>: <span id="points3">0</span> points</h2>
+					<h2><span class='myriad'>Team Dragon</span>: <span id="points4">0</span> points</h2>
+				</div>
+				<div id="page2bg"></div>
+				
+			</div>
+			<div id='page3' class='page'>
+				<div id="twitter-container" class="text-center">
+					<h1>Tweet #CITYC16 !</h1>
+					<a id="twitter-live" class="twitter-timeline" data-chrome="noscrollbar nofooter" href="https://twitter.com/hashtag/CITYC16" data-widget-id="768339457888190465">#CITYC16 Tweets</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
+			</div>
+			<!-- <div id='page4' class="page"></div>
+			<div id='page5' class="page"></div> -->
+			<div id='page6' class="page">
+				<div class="content-section text-center margin-auto">
+					<h1>Contact Information</h1>
+					<p style="margin-bottom: 35px">Questions? Need to find someone during the conference?</p>
+					<ul class="list-inline banner-social-buttons">
+						<li class="li_multiline_contact">
+							<h3 style="margin-bottom: 10px; font-size:25px;"><i class="fa fa-location-arrow fa-fw"></i>Address:</h3>
+						</li>
+						<li><a href="https://goo.gl/maps/BQe7s5NbbxE2" target="_blank">
+							<p style = "margin-bottom: 0px;">671 Sheppard Ave East</p>
+							<p>Toronto, Ontario, M2K 1B6</p>
+						</a></li>
+						<br>
+						<li class="li_multiline_contact">
+							<h3 style="margin-bottom: 10px; font-size:25px;"><i class="fa fa-phone fa-fw"></i>Phone:</h3>
+						</li>
+						<li>
+							<p style = "margin-bottom: 0px;">Silvia Li <i>at <b>(416) 527-1501</b></i></p>
+							<p class = "p_li_multiline_contacts">Ian Brinksman <i> at <b>(647) 963-7292</b></i></p>
+						</li>
+						<br>
+						<li>
+							<h3 style="margin-bottom: 10px; font-size:25px;"><i class="fa fa-envelope-o fa-fw"></i>General Text:</h3>
+						</li>
+						<li>
+							<a href="mailto:cityouthc@gmail.com"><p style = "font-size: 22px; color: #1C2E2E"><i>(647) 490-1601</i></p></a>
+						</li>
+					</ul>
+					<ul class="list-inline">
+						<li>
+							<a href="https://twitter.com/thecityouth" target="_blank" class="btn btn-lg contact-btn"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+						</li>
+						<li>
+							<a href="https://www.facebook.com/events/1065540353516465" target="_blank" class="btn btn-lg contact-btn"><i class="fa fa-calendar fa-fw"></i> <span class="network-name">Event Page</span></a>
+						</li>
+						<li>
+							<a href="https://www.facebook.com/cityouth1" target="_blank" class="btn btn-lg contact-btn"><i class="fa fa-facebook-square fa-fw"></i> <span class="network-name">Facebook</span></a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="dots-placeholder"></div>
+
+	</section>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/parallax.min.js"></script>
+	<script src="js/slick.js"></script>
+	<script src="js/index.js"></script>
+</body>
+
+</html>

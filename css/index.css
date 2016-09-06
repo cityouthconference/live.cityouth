@@ -1,0 +1,225 @@
+/* Custom Fonts */
+@font-face {
+	font-family: 'Myriad-Pro-Light';
+	src: url('../fonts/myriad-pro-light.ttf')  format('truetype');
+}
+
+@font-face {
+	font-family: 'Myriad-Pro';
+	src: url('../fonts/myriad-pro.ttf')  format('truetype');
+}
+
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	padding-top: 70px;
+	width: 100%;
+	height: 100%;
+	font-family: "Myriad-Pro-Light",Helvetica,Arial,sans-serif;
+	color: #333; 
+	/* color: #666 for lighter gray*/
+	background-color: #F7F7F7;
+}
+
+.margin-auto {
+	margin: auto;
+}
+
+.myriad {
+	font-family: "Myriad-Pro",Helvetica,Arial,sans-serif;
+}
+
+.navbar-custom {
+	font-size: 20px;
+	padding-top: 10px;
+}
+
+.navbar-brand{
+	font-size: 22px;
+	font-weight: bolder;
+}
+
+.navbar-nav {
+	float: right;
+}
+
+.navbar-nav li {
+	margin: 0px 10px;
+}
+
+.navbar-nav li a:hover,
+.navbar-nav li a:focus {
+	background-color: inherit;
+	color: #666;
+}
+
+.navbar-nav a{
+	color: #333; 
+}
+
+.container {
+	height: inherit;
+}
+
+#main {
+	height: 100%;
+}
+
+#dots-placeholder {
+	height: 35px;
+	margin-top: -35px;
+}
+
+.carousel {
+	margin-bottom: 40px;
+	width: 100%;
+}
+
+@media (min-width: 1600px) {
+	.container {
+		width: 1500px;
+	}
+}
+
+.page {
+	display: block;
+}
+
+#page1{
+	display: flex;
+	align-items: center;
+
+	background: url(../img/light.jpg) no-repeat center scroll;
+
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+
+#page1 h1 {
+	font-size: 140px;
+}
+
+#page1 h2 {
+	font-size: 50px;
+}
+
+#page1 h3 {
+	font-size: 40px;
+}
+
+#page1 h4 {
+	font-size: 30px;
+}
+
+
+#page1 p {
+	font-size: 20px;
+}
+
+#page2{
+	display: flex;
+	align-items: center;
+
+	background: url(../img/nature.jpg) no-repeat center scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+
+#page2 h1 {
+	font-size: 60px;
+}
+
+#page2 p {
+	font-size: 20px;
+}
+
+#page3 {
+	display:table;
+    height: 100%;
+    width: 100%;
+}
+
+#twitter-container {
+	display:table-cell;
+    vertical-align: middle;
+}
+
+#page6{
+	display: flex;
+	align-items: center;
+	background: url(../img/awildplace.jpg) no-repeat center scroll;
+
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-size: cover;
+	-o-background-size: cover;
+}
+
+#page6 br {
+	display: block;
+	height: 0px;
+}
+
+#page6 h1 {
+	font-size: 50px;
+}
+
+#page6 p {
+	font-size: 22px;
+}
+
+#page6 li p, #page6 li a p {
+	font-size: 23px;
+	color: #1C2E2E;
+}
+
+.network-name {
+	font-size: 22px;
+}
+
+#page6 .list-inline li {
+	margin: 0px;
+}
+
+.li_multiline_contact{
+	vertical-align: top;
+}
+
+ul.banner-social-buttons {
+	margin-top: 0;
+}
+
+@media(max-width:1199px) {
+	ul.banner-social-buttons {
+		margin-top: 15px;
+	}
+}
+
+@media(max-width:767px) {
+	ul.banner-social-buttons li {
+		display: block;
+		margin-bottom: 20px;
+		padding: 0;
+	}
+
+	ul.banner-social-buttons li:last-child {
+		margin-bottom: 0;
+	}
+}
+
+@media(min-width:768px) {
+	#page6 .list-inline li {
+		padding-bottom: 10px;
+	}
+}
+
+iframe{
+	height:100%;
+}
