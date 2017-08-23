@@ -88,7 +88,7 @@ function start() {
     }
     document.getElementById("points-update-time").innerHTML = "August " + date.getDate() + " 2017 at " + date.getHours() + " : " + minutes;
     document.getElementById("date").innerHTML = "August " + date.getDate() + " 2017";
-    document.getElementById("time").innerHTML =  date.getHours() + " : " + minutes;
+    document.getElementById("time").innerHTML =  parseHour(date.getHours()) + " : " + minutes;
     getEvents();
     resize();
     getPoints();
@@ -103,17 +103,18 @@ function getPoints()
         if (parseInt(minutes) < 10){
             minutes = "0" + minutes;
         }
-        document.getElementById("points-update-time").innerHTML = "August " + date.getDate() + " 2017 at " + date.getHours() + " : " + minutes;
-        document.getElementById("time").innerHTML =  date.getHours() + " : " + minutes;
+        document.getElementById("points-update-time").innerHTML = "August " + date.getDate() + " 2017 at " + parseHour(date.getHours()) + " : " + minutes;
+        document.getElementById("time").innerHTML =  parseHour(date.getHours()) + " : " + minutes;
 
         $.ajax({
             url: 'https://cityouth-conference.herokuapp.com/points',
             type: 'GET',
             success: function (data) {
-                document.getElementById("points1").innerHTML = data.water;
-                document.getElementById("points2").innerHTML = data.steel;
-                document.getElementById("points3").innerHTML = data.fire;
-                document.getElementById("points4").innerHTML = data.dragon;
+                console.log(data);
+                document.getElementById("points1").innerHTML = data.gryffin;
+                document.getElementById("points2").innerHTML = data.phoenix;
+                document.getElementById("points3").innerHTML = data.fairy;
+                document.getElementById("points4").innerHTML = data.unicorn;
             }
         });
         getPoints();
@@ -147,7 +148,29 @@ function getEvents() {
         }
         document.getElementById("this-event").innerHTML = current_event;
         document.getElementById("next-event").innerHTML = next_event;
-        document.getElementById("next-start").innerHTML = "Starting at " + next_start.substring(0, next_start.length-2) + " : " + next_start.slice(-2);
+        document.getElementById("next-start").innerHTML = "Starting at " + parse24hrDateString(next_start);
         getEvents();
     }, 5000);
+}
+
+/*
+ * Returns: a string representation of the time in standard representation (ie. 12:12 PM)
+ */
+function parse24hrDateString(time) {
+    var int_time = parseInt(time);
+    var hr = parseHour(int_time/100);
+    return " " +  hr + ":" + ("0" + (int_time%100)).slice(-2) + ((int_time >= 1200) ? " PM" : " AM");
+}
+
+function parseHour(hour) {
+    switch(hour) {
+        case 0:
+            hour = 12;
+            break;
+        case 12:
+            break;
+        default:
+            hour = hour % 12;
+    }
+    return hour;
 }
