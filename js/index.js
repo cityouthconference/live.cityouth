@@ -67,22 +67,29 @@ var schedule =
 var monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"]
 
 $('.carousel').slick({
-    dots:true,
+    dots: true,
     dotsClass: 'slick-dots',
     autoplay: true,
     autoplaySpeed: 10000
 });
 
-function resize(){
-    $('.carousel').height($("#main").height() - 45);
-    $('#twitter-live').attr('height', $("#main").height());
-    $('#twitter-live').attr('width', $("#main").width() - 700);
-
-}
-
 window.onload = start();
 
 function start() {
+    resize();
+    setClock();
+    getPoints();
+    getEvents();
+    poll();
+}
+
+function resize() {
+    $('.carousel').height($("#main").height() - 45);
+    $('#twitter-live').attr('height', $("#main").height());
+    $('#twitter-live').attr('width', $("#main").width() - 700);
+}
+
+function setClock() {
     var date = new Date();
     var year = date.getFullYear();
     var month = monthNames[date.getMonth()];
@@ -92,47 +99,30 @@ function start() {
     document.getElementById("points-update-time").innerHTML = `${month} ${day} ${year} at ${hours} : ${minutes}`;
     document.getElementById("date").innerHTML = `${month} ${day}, ${year}`
     document.getElementById("time").innerHTML = `${hours} : ${minutes}`
-    getEvents();
-    resize();
-    getPoints();
 }
 
-function getPoints()
-{
-    setTimeout(function(){
-        var date = new Date();
-        var year = date.getFullYear();
-        var month = monthNames[date.getMonth()];
-        var day = date.getDate();
-        var hours = parseHours(date.getHours());
-        var minutes = parseMinutes(date.getMinutes());
-        document.getElementById("points-update-time").innerHTML = `${month} ${date} ${year} at ${hours} : ${minutes}`;
-        document.getElementById("time").innerHTML = `${hours} : ${minutes}`
-
-        $.ajax({
-            url: 'https://cityouth-conference.herokuapp.com/points',
-            type: 'GET',
-            success: function (data) {
-                console.log(data);
-                Object.keys(data).forEach((key, i) => {
-                    document.getElementById(`points${i+1}`).innerHTML = data[key];
-                })
-            }
-        });
-        getPoints();
-    }, 300000);
-
+function getPoints() {
+    $.ajax({
+        url: 'https://cityouth-conference.herokuapp.com/points',
+        type: 'GET',
+        success: function (data) {
+            Object.keys(data).forEach((key, i) => {
+                document.getElementById(`name${i+1}`).innerHTML = key;
+                document.getElementById(`point${i+1}`).innerHTML = data[key];
+            })
+        }
+    });
 }
 
 function getEvents() {
-    setTimeout(function(){
-        var date = new Date();
-        var index = date.getDate() - 23;
-        var time = parseInt(String(date.getHours()) + date.getMinutes());
-        var current_event;
-        var next_event;
-        var next_start;
+    var date = new Date();
+    var time = parseInt(String(date.getHours()) + date.getMinutes());
+    var index = date.getDate() - 23;
+    var current_event = "";
+    var next_event = "";
+    var next_start;
 
+    if (schedule[index]) {
         for (var x = 0; x < schedule[index].length; x++) {
             if (typeof schedule[index][x+1] !== 'undefined' && parseInt(time) >= parseInt(schedule[index][x+1][0])) {
                 continue;
@@ -151,8 +141,16 @@ function getEvents() {
         document.getElementById("this-event").innerHTML = current_event;
         document.getElementById("next-event").innerHTML = next_event;
         document.getElementById("next-start").innerHTML = "Starting at " + parse24hrDateString(next_start);
+    }
+}
+
+function poll() {
+    setTimeout(function() {
+        setClock();
+        getPoints()
         getEvents();
-    }, 5000);
+        poll();
+    }, 300000);
 }
 
 /*
