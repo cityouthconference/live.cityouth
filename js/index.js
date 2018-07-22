@@ -114,10 +114,9 @@ function getPoints()
             type: 'GET',
             success: function (data) {
                 console.log(data);
-                document.getElementById("points1").innerHTML = data.gryffin;
-                document.getElementById("points2").innerHTML = data.phoenix;
-                document.getElementById("points3").innerHTML = data.fairy;
-                document.getElementById("points4").innerHTML = data.unicorn;
+                Object.keys(data).forEach((key, i) => {
+                    document.getElementById(`points${i+1}`).innerHTML = data[key];
+                })
             }
         });
         getPoints();
