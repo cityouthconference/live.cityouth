@@ -64,73 +64,65 @@ var schedule =
             ["2100", "Worship"],
             ["100000", "See you next year!"]]];
 
+var monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November","December"]
+
 $('.carousel').slick({
-    dots:true,
+    dots: true,
     dotsClass: 'slick-dots',
     autoplay: true,
     autoplaySpeed: 10000
 });
 
-function resize(){
-    $('.carousel').height($("#main").height() - 45);
-    $('#twitter-live').attr('height', $("#main").height());
-    $('#twitter-live').attr('width', $("#main").width() - 700);
-
-}
-
 window.onload = start();
 
 function start() {
-    var date = new Date();
-    var minutes = date.getMinutes();
-    if (parseInt(minutes) < 10){
-        minutes = "0" + minutes;
-    }
-    document.getElementById("points-update-time").innerHTML = "August " + date.getDate() + " 2017 at " + date.getHours() + " : " + minutes;
-    document.getElementById("date").innerHTML = "August " + date.getDate() + " 2017";
-    document.getElementById("time").innerHTML =  parseHour(date.getHours()) + " : " + minutes;
-    getEvents();
     resize();
+    setClock();
     getPoints();
+    getEvents();
+    poll();
 }
 
-function getPoints()
-{
-    setTimeout(function(){
+function resize() {
+    $('.carousel').height($("#main").height() - 45);
+    $('#twitter-live').attr('height', $("#main").height());
+    $('#twitter-live').attr('width', $("#main").width() - 700);
+}
 
-        var date = new Date();
-        var minutes = date.getMinutes();
-        if (parseInt(minutes) < 10){
-            minutes = "0" + minutes;
+function setClock() {
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = monthNames[date.getMonth()];
+    var day = date.getDate();
+    var hours = parseHours(date.getHours());
+    var minutes = parseMinutes(date.getMinutes());
+    document.getElementById("points-update-time").innerHTML = `${month} ${day} ${year} at ${hours} : ${minutes}`;
+    document.getElementById("date").innerHTML = `${month} ${day}, ${year}`
+    document.getElementById("time").innerHTML = `${hours} : ${minutes}`
+}
+
+function getPoints() {
+    $.ajax({
+        url: 'https://cityouth-conference.herokuapp.com/points',
+        type: 'GET',
+        success: function (data) {
+            Object.keys(data).forEach((key, i) => {
+                document.getElementById(`name${i+1}`).innerHTML = key;
+                document.getElementById(`point${i+1}`).innerHTML = data[key];
+            })
         }
-        document.getElementById("points-update-time").innerHTML = "August " + date.getDate() + " 2017 at " + parseHour(date.getHours()) + " : " + minutes;
-        document.getElementById("time").innerHTML =  parseHour(date.getHours()) + " : " + minutes;
-
-        $.ajax({
-            url: 'https://cityouth-conference.herokuapp.com/points',
-            type: 'GET',
-            success: function (data) {
-                console.log(data);
-                document.getElementById("points1").innerHTML = data.gryffin;
-                document.getElementById("points2").innerHTML = data.phoenix;
-                document.getElementById("points3").innerHTML = data.fairy;
-                document.getElementById("points4").innerHTML = data.unicorn;
-            }
-        });
-        getPoints();
-    }, 1000);
-
+    });
 }
 
 function getEvents() {
-    setTimeout(function(){
-        var date = new Date();
-        var index = date.getDate() - 23;
-        var time = parseInt(String(date.getHours()) + date.getMinutes());
-        var current_event;
-        var next_event;
-        var next_start;
+    var date = new Date();
+    var time = parseInt(String(date.getHours()) + date.getMinutes());
+    var index = date.getDate() - 23;
+    var current_event = "";
+    var next_event = "";
+    var next_start;
 
+    if (schedule[index]) {
         for (var x = 0; x < schedule[index].length; x++) {
             if (typeof schedule[index][x+1] !== 'undefined' && parseInt(time) >= parseInt(schedule[index][x+1][0])) {
                 continue;
@@ -149,8 +141,16 @@ function getEvents() {
         document.getElementById("this-event").innerHTML = current_event;
         document.getElementById("next-event").innerHTML = next_event;
         document.getElementById("next-start").innerHTML = "Starting at " + parse24hrDateString(next_start);
+    }
+}
+
+function poll() {
+    setTimeout(function() {
+        setClock();
+        getPoints()
         getEvents();
-    }, 5000);
+        poll();
+    }, 300000);
 }
 
 /*
@@ -162,15 +162,22 @@ function parse24hrDateString(time) {
     return " " +  hr + ":" + ("0" + (int_time%100)).slice(-2) + ((int_time >= 1200) ? " PM" : " AM");
 }
 
-function parseHour(hour) {
-    switch(hour) {
+function parseHours(hours) {
+    switch(hours) {
         case 0:
-            hour = 12;
+            hours = 12;
             break;
         case 12:
             break;
         default:
-            hour = hour % 12;
+            hours = hours % 12;
     }
-    return hour;
+    return hours;
+}
+
+function parseMinutes(minutes) {
+  if (parseInt(minutes) < 10){
+      minutes = "0" + minutes;
+  }
+  return minutes
 }

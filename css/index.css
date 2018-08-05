@@ -223,3 +223,7 @@ ul.banner-social-buttons {
 iframe{
 	height:100%;
 }
+
+.team-name {
+	text-transform: capitalize;
+}
