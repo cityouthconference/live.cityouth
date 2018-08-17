@@ -19,7 +19,7 @@ body {
 	width: 100%;
 	height: 100%;
 	font-family: "Myriad-Pro-Light",Helvetica,Arial,sans-serif;
-	color: #333; 
+	color: #333;
 	/* color: #666 for lighter gray*/
 	background-color: #F7F7F7;
 }
@@ -57,7 +57,7 @@ body {
 }
 
 .navbar-nav a{
-	color: #333; 
+	color: #333;
 }
 
 .container {
@@ -147,8 +147,8 @@ body {
 }
 
 #twitter-container {
-	display:table-cell;
-    vertical-align: middle;
+	max-width: 1200px;
+	margin: auto;
 }
 
 #page6{
